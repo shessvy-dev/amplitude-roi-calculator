@@ -145,6 +145,13 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
   .footer{padding:14px 24px}
 }
 </style>
+<script src="https://cdn.amplitude.com/script/YOUR_AMPLITUDE_API_KEY.js"></script>
+<script>
+  window.amplitude.init('YOUR_AMPLITUDE_API_KEY', {
+    fetchRemoteConfig: true,
+    autocapture: true,
+  });
+</script>
 </head>
 <body>
 
@@ -241,8 +248,12 @@ TOOLS.forEach(t=>{
   hdr.className='tool-hdr';
   hdr.innerHTML=`<span class="tdot"></span><span class="tname">${t.label}</span><span class="tex">${t.ex}</span>`;
   hdr.addEventListener('click',()=>{
-    sel.has(t.id)?sel.delete(t.id):sel.add(t.id);
+    const wasSelected=sel.has(t.id);
+    wasSelected?sel.delete(t.id):sel.add(t.id);
     item.className='tool-item'+(sel.has(t.id)?' on':'');
+    window.amplitude.track(wasSelected?'Tool Deselected':'Tool Selected',{
+      tool_id:t.id,tool_label:t.label,tools_selected:sel.size,selected_tools:Array.from(sel)
+    });
     render();
   });
   item.appendChild(hdr); tl.appendChild(item);
@@ -317,6 +328,7 @@ function mbox(cls,label,val,unit){
   return `<div class="mbox ${cls}"><div class="ml">${label}</div><div class="mv">${val}</div><div class="mu">${unit}</div></div>`;
 }
 
+let renderTimer=null;
 function render(){
   const m=getM();
   const oa=document.getElementById('outputArea');
@@ -324,6 +336,23 @@ function render(){
     oa.innerHTML='<div class="zs">Select 2 or more tools to calculate your cost.<span>Every number is auditable — no black boxes.</span></div>';
     return;
   }
+
+  clearTimeout(renderTimer);
+  renderTimer=setTimeout(()=>{
+    window.amplitude.track('Calculation Viewed',{
+      tools_count:m.n,integration_pairs:m.pairs,
+      analysts:m.analysts,data_engineers:m.deng,
+      total_savings:Math.round(m.totalSavings),
+      overhead_ratio:m.overheadRatio,
+      analyst_capacity_cost:Math.round(m.c1),
+      engineering_tax_cost:Math.round(m.c2),
+      decision_lag_cost:Math.round(m.c3),
+      analyst_ftes_unlocked:parseFloat(m.analystFTE),
+      new_experiments_possible:m.newExperiments,
+      days_to_answer:m.days,
+      selected_tools:Array.from(sel)
+    });
+  },800);
 
   oa.innerHTML=`
     <div class="badge">${m.n} tools &rarr; <strong>${m.pairs}</strong> integration pairs &rarr; every answer crosses ${m.pairs} validation boundaries</div>
@@ -424,6 +453,7 @@ const sliderMap={
   acost:'acostV', dcost:'dcostV',
   req:'reqV', wait:'waitV', days:'daysV'
 };
+const sliderTimers={};
 Object.keys(sliderMap).forEach(id=>{
   document.getElementById(id).addEventListener('input',e=>{
     const v=parseFloat(e.target.value);
@@ -433,6 +463,10 @@ Object.keys(sliderMap).forEach(id=>{
     else if(id==='days') out.textContent=v%1===0?v:v.toFixed(1);
     else out.textContent=v;
     render();
+    clearTimeout(sliderTimers[id]);
+    sliderTimers[id]=setTimeout(()=>{
+      window.amplitude.track('Slider Changed',{slider_id:id,value:v});
+    },500);
   });
 });
 
