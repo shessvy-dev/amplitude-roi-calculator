@@ -7,21 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#F4F2ED;
-  --surface:#FFFFFF;
-  --surface2:#ECEAE4;
-  --border:#DDD9D1;
-  --border-strong:#C4BFB6;
-  --text:#18160F;
-  --muted:#7A756C;
-  --muted2:#ABA69E;
-  --red:#C4401E;--red-bg:#FDF0EC;--red-border:#F0C0AE;
-  --green:#1A7850;--green-bg:#EDF7F2;--green-border:#AADDC4;
-  --blue:#1A46A0;--blue-bg:#EEF2FA;--blue-border:#B4C4EC;
-  --amber:#8A5A0C;--amber-bg:#FBF5EA;--amber-border:#E8D09A;
-  --r:10px;--rs:6px;
-}
+:root{--bg:#F4F2ED;--surface:#FFFFFF;--surface2:#ECEAE4;--border:#DDD9D1;--border-strong:#C4BFB6;--text:#18160F;--muted:#7A756C;--muted2:#ABA69E;--red:#C4401E;--red-bg:#FDF0EC;--red-border:#F0C0AE;--green:#1A7850;--green-bg:#EDF7F2;--green-border:#AADDC4;--blue:#1A46A0;--blue-bg:#EEF2FA;--blue-border:#B4C4EC;--amber:#8A5A0C;--amber-bg:#FBF5EA;--amber-border:#E8D09A;--r:10px;--rs:6px}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
 .header{background:var(--text);padding:40px 48px 38px;position:relative;overflow:hidden}
 .header::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,0.05)}
@@ -30,7 +16,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .header h1{font-family:'Syne',sans-serif;font-size:40px;font-weight:700;line-height:1.05;letter-spacing:-0.02em;color:#F4F2ED;margin-bottom:10px}
 .header h1 em{color:#E8663A;font-style:normal}
 .header p{font-size:14px;color:rgba(255,255,255,0.5);max-width:580px;line-height:1.65}
-.main{display:grid;grid-template-columns:360px 1fr;min-height:calc(100vh - 170px)}
+.main{display:grid;grid-template-columns:380px 1fr;min-height:calc(100vh - 170px)}
 .left{background:var(--surface);border-right:1px solid var(--border);padding:28px 28px 40px}
 .right{padding:28px 32px;background:var(--bg)}
 .sh{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted);margin:24px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
@@ -67,11 +53,23 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 .ht-arrow{display:flex;align-items:center;justify-content:center;padding:0 16px;background:var(--surface)}
 .ht-arrow svg{opacity:0.3}
 .ht-sub{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5;max-width:180px}
-.cost-banner{background:var(--red-bg);border:1px solid var(--red-border);border-radius:var(--r);padding:18px 22px;display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.cb-left{}
-.cb-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--red);margin-bottom:4px}
-.cb-sub{font-size:11px;color:var(--red);opacity:0.7;margin-top:4px}
-.cb-val{font-family:'Syne',sans-serif;font-size:36px;font-weight:700;color:var(--red)}
+.cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.cost-card{border-radius:var(--r);padding:16px 18px}
+.cost-card.r{background:var(--red-bg);border:1px solid var(--red-border)}
+.cost-card.a{background:var(--amber-bg);border:1px solid var(--amber-border)}
+.cc-label{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}
+.cost-card.r .cc-label{color:var(--red)}
+.cost-card.a .cc-label{color:var(--amber)}
+.cc-val{font-family:'Syne',sans-serif;font-size:30px;font-weight:700;line-height:1}
+.cost-card.r .cc-val{color:var(--red)}
+.cost-card.a .cc-val{color:var(--amber)}
+.cc-sub{font-size:11px;margin-top:5px;line-height:1.5}
+.cost-card.r .cc-sub{color:var(--red);opacity:0.75}
+.cost-card.a .cc-sub{color:var(--amber);opacity:0.75}
+.savings-banner{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 22px;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.sb-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:3px}
+.sb-sub{font-size:11px;color:var(--muted2)}
+.sb-val{font-family:'Syne',sans-serif;font-size:36px;font-weight:700;color:var(--green)}
 .msec{margin-bottom:16px}
 .msec-title{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:8px;padding-bottom:7px;border-bottom:1px solid var(--border)}
 .mpair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -85,9 +83,8 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 .mbox.g{background:var(--green-bg);border:1px solid var(--green-border)}
 .mbox.g .ml,.mbox.g .mu{color:var(--green)}
 .mbox.g .mv{color:var(--green)}
-.savings-banner{background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:var(--r);padding:16px 22px;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.sb-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber)}
-.sb-val{font-family:'Syne',sans-serif;font-size:30px;font-weight:700;color:var(--amber)}
+.fte-callout{background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--rs);padding:12px 16px;font-size:12px;color:var(--green);line-height:1.6;margin-bottom:16px}
+.fte-callout strong{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;display:block;margin-bottom:2px}
 .note{font-size:11px;color:var(--muted);background:var(--surface2);border-radius:var(--rs);padding:9px 12px;margin-top:10px;line-height:1.5}
 .gen-btn{width:100%;margin-top:16px;padding:13px;background:var(--text);border:none;border-radius:var(--rs);font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:#F4F2ED;cursor:pointer;letter-spacing:0.02em;transition:opacity 0.15s}
 .gen-btn:hover{opacity:0.82}
@@ -113,50 +110,45 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 .copy-btn{margin-top:22px;padding:9px 20px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);font-size:13px;color:var(--muted);cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif}
 .copy-btn:hover{border-color:var(--border-strong);color:var(--text)}
 .footer{background:var(--surface2);border-top:1px solid var(--border);padding:16px 48px;font-size:11px;color:var(--muted);line-height:1.7}
-@media(max-width:820px){
-  .main{grid-template-columns:1fr}
-  .left{border-right:none;border-bottom:1px solid var(--border)}
-  .sum-stats{grid-template-columns:1fr 1fr}
-  .header{padding:28px 24px}
-  .header h1{font-size:30px}
-  .summary-wrap{padding:28px 24px}
-  .footer{padding:16px 24px}
-}
+@media(max-width:860px){.main{grid-template-columns:1fr}.left{border-right:none;border-bottom:1px solid var(--border)}.sum-stats{grid-template-columns:1fr 1fr}.cost-grid{grid-template-columns:1fr}.header{padding:28px 24px}.header h1{font-size:30px}.summary-wrap{padding:28px 24px}.footer{padding:16px 24px}}
 </style>
 </head>
 <body>
 <div class="header">
   <div class="kicker">// Analytics fragmentation cost</div>
   <h1>From <em>days</em> to minutes.</h1>
-  <p>Every point solution you add slows down how fast your team can answer a question and act on it. Quantify what that delay is actually costing you — in time, people, and decisions.</p>
+  <p>Every point solution you add slows down how fast your team can answer a question and act on it. Quantify what that delay is actually costing you &mdash; in analyst capacity and decision velocity.</p>
 </div>
 <div class="main">
   <div class="left">
-    <div class="ctx">No contract data needed. These numbers come from how your team works — not what you pay for tools.</div>
+    <div class="ctx">Two auditable cost drivers: analyst time locked in tool-switching, and the decision-lag tax on every stakeholder waiting for an answer.</div>
     <div class="sh">Your current analytics tools</div>
     <div id="toolList"></div>
-    <div class="sh">How your team works</div>
-    <div class="row-lbl">Data / insight requests per week <b id="reqV">20</b></div>
+    <div class="sh">Your data team</div>
+    <div class="row-lbl">Analytics / data team size <b id="analystsV">5</b></div>
+    <input type="range" min="1" max="30" value="5" id="analysts" step="1">
+    <div class="row-lbl">Analyst time on data prep &amp; reconciliation today <b id="prepV">40%</b></div>
+    <input type="range" min="15" max="70" value="40" id="prep" step="5">
+    <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted2);margin-top:3px"><span>industry low</span><span>Anaconda avg: 45%</span><span>industry high</span></div>
+    <div class="sh">Decision demand</div>
+    <div class="row-lbl">Insight requests per week <b id="reqV">20</b></div>
     <input type="range" min="1" max="200" value="20" id="req" step="1">
-    <div class="row-lbl">People waiting on each answer <b id="waitV">4</b></div>
+    <div class="row-lbl">Stakeholders waiting per answer <b id="waitV">4</b></div>
     <input type="range" min="1" max="20" value="4" id="wait" step="1">
-    <div class="row-lbl">Avg fully-loaded cost per person <b id="costV">$120K</b></div>
-    <input type="range" min="60000" max="400000" value="120000" id="cost" step="5000">
+    <div class="row-lbl">Avg fully-loaded cost per person <b id="costV">$130K</b></div>
+    <input type="range" min="60000" max="400000" value="130000" id="cost" step="5000">
     <div class="row-lbl">Current days to answer a data question <b id="daysV">3</b></div>
     <input type="range" min="1" max="14" value="3" id="days" step="0.5">
   </div>
   <div class="right">
     <div id="outputArea">
-      <div class="zs">
-        Select 2 or more tools to calculate your speed-to-insight cost.
-        <span>Uses only your team size and workflow — no pricing data required.</span>
-      </div>
+      <div class="zs">Select 2 or more tools to calculate your cost.<span>Uses team size and workflow &mdash; no contract or pricing data required.</span></div>
     </div>
   </div>
 </div>
 <div id="summaryArea" style="display:none"></div>
 <div class="footer">
-  Methodology: Time-to-insight delay calculated from N&times;(N-1)/2 integration pairs &times; avg cross-tool validation overhead. Human cost = (current days &minus; 1 day) &times; requests/week &times; people waiting &times; hourly rate &times; 52 weeks. Decision velocity improvement based on Modern Data Company 2024 survey (70%+ of orgs take &gt;1 day for data access), Anaconda State of Data Science (45% of analyst time on prep), and chiefmartec research. Unified platform baseline = 1 day &rarr; same-session insight with Amplitude.
+  <strong>Methodology &mdash; Cost 1 (Analyst capacity):</strong> team size &times; salary &times; (current prep % &minus; 15% unified baseline). Prep % benchmark: Anaconda State of Data Science 2023 (45% avg). Unified baseline 15% from Amplitude customer data. &nbsp; <strong>Cost 2 (Decision-lag tax):</strong> requests/wk &times; 52 &times; stakeholders &times; hourly &times; lag days &times; 15% context-switch factor. 15% reflects interruption/re-briefing cost, not full idle time (Gloria Mark, UCI). &nbsp; <strong>Experiment velocity:</strong> current days &divide; 0.125 unified days.
 </div>
 <script>
 const TOOLS=[
@@ -177,78 +169,103 @@ TOOLS.forEach(t=>{
   const hdr=document.createElement('div');
   hdr.className='tool-hdr';
   hdr.innerHTML=`<span class="tdot"></span><span class="tname">${t.label}</span><span class="tex">${t.ex}</span>`;
-  hdr.addEventListener('click',()=>{
-    sel.has(t.id)?sel.delete(t.id):sel.add(t.id);
-    item.className='tool-item'+(sel.has(t.id)?' on':'');
-    render();
-  });
+  hdr.addEventListener('click',()=>{sel.has(t.id)?sel.delete(t.id):sel.add(t.id);item.className='tool-item'+(sel.has(t.id)?' on':'');render();});
   item.appendChild(hdr);tl.appendChild(item);
 });
 function fK(n){return n>=1000000?'$'+(n/1000000).toFixed(1)+'M':n>=1000?'$'+(n/1000).toFixed(0)+'K':'$'+Math.round(n)}
-function fN(n){return Math.round(n).toLocaleString()}
 let lastM=null;
 function getM(){
-  const n=sel.size;
-  if(n<=1)return null;
+  const n=sel.size; if(n<=1)return null;
+  const analysts=parseInt(document.getElementById('analysts').value);
+  const prepPct=parseInt(document.getElementById('prep').value)/100;
   const req=parseInt(document.getElementById('req').value);
   const wait=parseInt(document.getElementById('wait').value);
-  const costPerPerson=parseInt(document.getElementById('cost').value);
+  const costPerson=parseInt(document.getElementById('cost').value);
   const currentDays=parseFloat(document.getElementById('days').value);
   const pairs=n*(n-1)/2;
-  const unifiedDays=0.125;
-  const hourlyPerPerson=costPerPerson/2080;
-  const costPerRequest=currentDays*8*wait*hourlyPerPerson;
-  const annualCostSlow=costPerRequest*req*52;
-  const costPerRequestFast=unifiedDays*8*wait*hourlyPerPerson;
-  const annualCostFast=costPerRequestFast*req*52;
-  const annualSavings=annualCostSlow-annualCostFast;
-  const reconHrsWk=Math.min(pairs*2.5,30);
+  const UNIFIED_PREP=0.15, UNIFIED_DAYS=0.125, CONTEXT_SWITCH=0.15;
+  const hourly=costPerson/2080;
+  const prepDelta=Math.max(prepPct-UNIFIED_PREP,0);
+  const analystSavings=analysts*costPerson*prepDelta;
+  const analystHrsWkSaved=Math.round(analysts*prepDelta*40);
+  const fteEquiv=(analysts*prepDelta).toFixed(1);
+  const lagDaysPerReq=Math.max(currentDays-UNIFIED_DAYS,0);
+  const lagSavingsAnnual=req*52*wait*hourly*lagDaysPerReq*8*CONTEXT_SWITCH;
+  const totalSavings=analystSavings+lagSavingsAnnual;
+  const expVelocity=Math.min(Math.round(currentDays/UNIFIED_DAYS/8),24);
+  const analystHrsWkToday=Math.round(analysts*prepPct*40);
+  const analystHrsWkUnified=Math.round(analysts*UNIFIED_PREP*40);
   const decisionsPerYear=req*52;
-  const daysLostPerYear=Math.round((currentDays-1)*req*52/5);
-  const experimentVelocityMultiplier=Math.round(currentDays/unifiedDays/8);
-  return{n,pairs,req,wait,costPerPerson,currentDays,unifiedDays,hourlyPerPerson,annualCostSlow,annualCostFast,annualSavings,reconHrsWk,decisionsPerYear,daysLostPerYear,experimentVelocityMultiplier,weeklyHoursWasted:Math.round(reconHrsWk+(currentDays-1)*8*Math.min(req/5,4))};
+  const weeksLost=Math.round(lagDaysPerReq*req*52/5);
+  return{n,pairs,analysts,prepPct,req,wait,costPerson,currentDays,analystSavings,analystHrsWkSaved,fteEquiv,analystHrsWkToday,analystHrsWkUnified,lagSavingsAnnual,totalSavings,expVelocity,decisionsPerYear,weeksLost,hourly,prepDelta,lagDaysPerReq};
 }
 function mbox(cls,label,val,unit){return `<div class="mbox ${cls}"><div class="ml">${label}</div><div class="mv">${val}</div><div class="mu">${unit}</div></div>`;}
 function render(){
-  const m=getM();lastM=m;
+  const m=getM(); lastM=m;
   const oa=document.getElementById('outputArea');
-  if(!m){oa.innerHTML='<div class="zs">Select 2 or more tools to calculate your speed-to-insight cost.<span>Uses only your team size and workflow — no pricing data required.</span></div>';document.getElementById('summaryArea').style.display='none';return;}
+  if(!m){oa.innerHTML='<div class="zs">Select 2 or more tools to calculate your cost.<span>Uses team size and workflow &mdash; no contract or pricing data required.</span></div>';document.getElementById('summaryArea').style.display='none';return;}
   oa.innerHTML=`
-    <div class="badge">${m.n} tools &rarr; <strong>${m.pairs}</strong> integration pairs &rarr; data must be validated across ${m.pairs} connections before every answer</div>
+    <div class="badge">${m.n} tools &rarr; <strong>${m.pairs}</strong> integration pairs &rarr; every answer crosses ${m.pairs} validation boundaries</div>
     <div class="hero-time">
       <div class="ht-side left-side">
-        <div class="ht-label bad">Today — fragmented stack</div>
+        <div class="ht-label bad">Today &mdash; fragmented stack</div>
         <div class="ht-val bad">${m.currentDays%1===0?m.currentDays:m.currentDays.toFixed(1)}</div>
         <div class="ht-unit">days to answer a data question</div>
-        <div class="ht-sub">${m.decisionsPerYear.toLocaleString()} decisions/yr each delayed — ${m.daysLostPerYear.toLocaleString()} working weeks lost</div>
+        <div class="ht-sub">${m.decisionsPerYear.toLocaleString()} decisions/yr each delayed &mdash; ${m.weeksLost} working weeks of lag</div>
       </div>
       <div class="ht-arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="#18160F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="ht-side">
         <div class="ht-label good">Unified platform</div>
         <div class="ht-val good">~1</div>
         <div class="ht-unit">hour to answer the same question</div>
-        <div class="ht-sub">Same-session insight. No cross-tool validation. Ask, answer, act.</div>
+        <div class="ht-sub">Single data model. No cross-tool validation. Ask, answer, act.</div>
       </div>
     </div>
-    <div class="cost-banner">
-      <div class="cb-left"><div class="cb-label">Annual cost of slow decisions</div><div class="cb-sub">${m.req} requests/wk &times; ${m.wait} people waiting &times; ${m.currentDays}d avg delay &times; ${fK(m.costPerPerson)} salary</div></div>
-      <div class="cb-val">${fK(m.annualCostSlow)}</div>
+    <div class="cost-grid">
+      <div class="cost-card r">
+        <div class="cc-label">Cost 1 &mdash; Analyst capacity lost</div>
+        <div class="cc-val">${fK(m.analystSavings)}</div>
+        <div class="cc-sub">${m.analysts} analysts &times; ${Math.round(m.prepPct*100)}% prep time &minus; 15% unified baseline &times; ${fK(m.costPerson)} salary</div>
+      </div>
+      <div class="cost-card a">
+        <div class="cc-label">Cost 2 &mdash; Decision-lag tax</div>
+        <div class="cc-val">${fK(m.lagSavingsAnnual)}</div>
+        <div class="cc-sub">${m.req} req/wk &times; ${m.wait} stakeholders &times; ${m.lagDaysPerReq.toFixed(1)}d lag &times; 15% interruption factor</div>
+      </div>
     </div>
-    <div class="msec"><div class="msec-title">Reconciliation overhead — team hours / week</div><div class="mpair">${mbox('r','Fragmented stack',Math.round(m.reconHrsWk),'hrs/week validating data across tools')}${mbox('g','Unified platform','~2','hrs/week — one source of truth')}</div></div>
-    <div class="msec"><div class="msec-title">Time to answer a data question</div><div class="mpair">${mbox('r','Fragmented stack',m.currentDays%1===0?m.currentDays:m.currentDays.toFixed(1),'days — cross-tool validation required')}${mbox('g','Unified platform','~1hr','same session, no reconciliation')}</div></div>
-    <div class="msec"><div class="msec-title">Decision &amp; experiment velocity</div><div class="mpair">${mbox('r','Fragmented stack','1&times;','baseline — decisions bottlenecked by data lag')}${mbox('g','Unified platform',m.experimentVelocityMultiplier+'&times;','faster experiment cycles possible')}</div></div>
-    <div class="msec"><div class="msec-title">Annual cost — human capital</div><div class="mpair">${mbox('r','Fragmented stack',fK(m.annualCostSlow),'in people time waiting for answers')}${mbox('g','Unified platform',fK(m.annualCostFast),'— insight in the same session')}</div></div>
-    <div class="savings-banner"><div class="sb-label">Annual time savings — in human cost</div><div class="sb-val">${fK(m.annualSavings)}</div></div>
-    <div class="note">These numbers use only your team size and workflow. No tool pricing data required.</div>
+    <div class="savings-banner">
+      <div class="sb-left">
+        <div class="sb-label">Total recoverable value &mdash; annual</div>
+        <div class="sb-sub">Analyst capacity + decision lag &mdash; both auditable, both conservative</div>
+      </div>
+      <div class="sb-val">${fK(m.totalSavings)}</div>
+    </div>
+    <div class="fte-callout">
+      <strong>${m.fteEquiv} analyst FTE equivalent recaptured</strong>
+      ${m.analystHrsWkSaved} hrs/week freed from reconciliation &amp; data prep &mdash; capacity your team can redirect to actual analysis, experimentation, and product decisions.
+    </div>
+    <div class="msec"><div class="msec-title">Analyst hours / week &mdash; data prep &amp; reconciliation</div><div class="mpair">
+      ${mbox('r','Fragmented stack',m.analystHrsWkToday,'hrs/week on prep &mdash; '+Math.round(m.prepPct*100)+'% of team capacity')}
+      ${mbox('g','Unified platform',m.analystHrsWkUnified,'hrs/week &mdash; 15% baseline, rest is real work')}
+    </div></div>
+    <div class="msec"><div class="msec-title">Time to answer a data question</div><div class="mpair">
+      ${mbox('r','Fragmented stack',m.currentDays%1===0?m.currentDays:m.currentDays.toFixed(1),'days &mdash; cross-tool validation required')}
+      ${mbox('g','Unified platform','~1hr','same session, no reconciliation')}
+    </div></div>
+    <div class="msec"><div class="msec-title">Experiment &amp; decision velocity</div><div class="mpair">
+      ${mbox('r','Fragmented stack','1&times;','baseline &mdash; cycle gated by data turnaround')}
+      ${mbox('g','Unified platform',m.expVelocity+'&times;','faster cycles possible with same team')}
+    </div></div>
+    <div class="note"><strong>How to read this:</strong> Cost 1 uses your team size and a published prep-time benchmark. Cost 2 applies a conservative 15% interruption factor &mdash; not full idle time. Both figures are intentionally understated to hold up in a CFO conversation.</div>
     <button class="gen-btn" id="genBtn" onclick="generateSummary()">Generate executive summary</button>
     <div class="apikey-row"><input type="password" id="apiKeyInput" placeholder="Anthropic API key (sk-ant-...)" autocomplete="off"></div>
-    <div class="apikey-hint">Your key is used only to call the Anthropic API directly from your browser — never stored or sent anywhere else.</div>
+    <div class="apikey-hint">Your key is used only to call the Anthropic API directly from your browser &mdash; never stored or sent anywhere else.</div>
   `;
 }
-const sliderMap={req:'reqV',wait:'waitV',cost:'costV',days:'daysV'};
-Object.keys(sliderMap).forEach(id=>{document.getElementById(id).addEventListener('input',e=>{const v=parseFloat(e.target.value);const out=document.getElementById(sliderMap[id]);if(id==='cost')out.textContent=fK(v);else if(id==='days')out.textContent=v%1===0?v:v.toFixed(1);else out.textContent=v;render();});});
+const sliderMap={analysts:'analystsV',prep:'prepV',req:'reqV',wait:'waitV',cost:'costV',days:'daysV'};
+Object.keys(sliderMap).forEach(id=>{document.getElementById(id).addEventListener('input',e=>{const v=parseFloat(e.target.value);const out=document.getElementById(sliderMap[id]);if(id==='cost')out.textContent=fK(v);else if(id==='prep')out.textContent=v+'%';else if(id==='days')out.textContent=v%1===0?v:v.toFixed(1);else out.textContent=v;render();});});
 async function generateSummary(){
-  const m=lastM;if(!m)return;
+  const m=lastM; if(!m)return;
   const apiKeyEl=document.getElementById('apiKeyInput');
   const apiKey=apiKeyEl?apiKeyEl.value.trim():'';
   if(!apiKey){if(apiKeyEl){apiKeyEl.focus();apiKeyEl.style.borderColor='var(--red)';setTimeout(()=>{apiKeyEl.style.borderColor=''},2000);}return;}
@@ -258,25 +275,23 @@ async function generateSummary(){
   sa.style.display='block';
   sa.innerHTML=`<div class="summary-wrap"><div class="loading"><div class="spinner"></div>Writing your executive summary...</div></div>`;
   sa.scrollIntoView({behavior:'smooth',block:'start'});
-  const daysLost=m.daysLostPerYear;
-  const expMultiplier=m.experimentVelocityMultiplier;
-  const prompt=`Write a 3-paragraph executive summary for a business evaluating consolidating their fragmented analytics stack. The core argument is about speed: fragmented tools slow down how fast teams can answer questions and act on them. Tone: direct, confident advisor. Not a sales pitch.\n\nTheir stack: ${m.n} analytics tools with ${m.pairs} integration pairs\nData/insight requests per week: ${m.req}\nPeople waiting on each answer: ${m.wait}\nCurrent days to answer a data question: ${m.currentDays} days\nWith a unified platform: ~1 hour\nAnnual cost of slow decisions (human time): ${fK(m.annualCostSlow)}\nAnnual savings: ${fK(m.annualSavings)}\nWorking weeks lost per year: ${daysLost}\nExperiment velocity improvement: ${expMultiplier}x\n\nNo bullet points. No headers. Max 4 sentences per paragraph. Write for a VP or Director of Product, Engineering, or Data.`;
+  const prompt=`Write a 3-paragraph executive summary for a VP or Director evaluating whether to consolidate their fragmented analytics stack. Tone: direct, confident advisor. Not a sales pitch.\n\nContext:\n- ${m.n} analytics tools, ${m.pairs} integration pairs\n- Data team: ${m.analysts} analysts, ${Math.round(m.prepPct*100)}% of time on data prep/reconciliation\n- ${m.req} insight requests/week, ${m.wait} stakeholders per answer\n- ${m.currentDays} days to answer today vs ~1 hour unified\n- Analyst capacity cost (recoverable): ${fK(m.analystSavings)}/year (${m.fteEquiv} FTE equivalent)\n- Decision-lag tax (15% interruption factor): ${fK(m.lagSavingsAnnual)}/year\n- Total recoverable value: ${fK(m.totalSavings)}/year\n- Experiment velocity: up to ${m.expVelocity}x faster\n\nParagraph 1: The analyst capacity problem. Your data team spends ${Math.round(m.prepPct*100)}% of their time not doing analysis. Explain what reconciliation across ${m.n} tools and ${m.pairs} integration points really means in practice. Frame ${m.fteEquiv} FTE locked in that work as the most direct, defensible cost.\n\nParagraph 2: What speed does to how teams work. Going from ${m.currentDays} days to 1 hour changes the questions people ask. Make the behavioral shift concrete: teams stop batching questions, stop hedging, start experimenting. ${m.expVelocity}x faster cycles is what happens when the bottleneck disappears.\n\nParagraph 3: The case is conservative by design. ${fK(m.totalSavings)} uses a 15% interruption factor and published benchmarks — built to survive CFO scrutiny. The harder-to-quantify upside: fewer decisions on stale data, faster iterations, an analytics team that actually does analytics. End with what it costs to keep the current setup.\n\nNo bullet points. No headers. Max 4 sentences per paragraph.`;
   try{
     const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:900,messages:[{role:'user',content:prompt}]})});
     if(!resp.ok){const t=await resp.text();throw new Error(`${resp.status}: ${t.slice(0,300)}`);}
     const data=await resp.json();
     if(data.error)throw new Error(data.error.message);
     const text=data.content?.find(b=>b.type==='text')?.text;
-    if(!text)throw new Error('No text content in response');
+    if(!text)throw new Error('No text in response');
     const paras=text.trim().split(/\n\n+/).filter(p=>p.trim().length>20);
     const today=new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-    sa.innerHTML=`<div class="summary-wrap"><h2>From days to minutes — the case for a unified analytics stack</h2><div class="sum-date">Executive summary &middot; ${today}</div><div class="sum-stats"><div class="ss r"><div class="ssl">Days to insight today</div><div class="ssv">${m.currentDays}d</div></div><div class="ss g"><div class="ssl">Days to insight unified</div><div class="ssv">~1hr</div></div><div class="ss r"><div class="ssl">Working weeks lost / yr</div><div class="ssv">${daysLost}w</div></div><div class="ss a"><div class="ssl">Annual savings</div><div class="ssv">${fK(m.annualSavings)}</div></div></div><div class="sum-body">${paras.map(p=>`<p>${p}</p>`).join('')}</div><button class="copy-btn" id="copyBtn" onclick="copySummary()">Copy summary text</button></div>`;
+    sa.innerHTML=`<div class="summary-wrap"><h2>The case for a unified analytics stack</h2><div class="sum-date">Executive summary &middot; ${today}</div><div class="sum-stats"><div class="ss r"><div class="ssl">Analyst FTEs locked in prep</div><div class="ssv">${m.fteEquiv}</div></div><div class="ss g"><div class="ssl">Days to insight &rarr; unified</div><div class="ssv">~1hr</div></div><div class="ss a"><div class="ssl">Experiment velocity</div><div class="ssv">${m.expVelocity}&times;</div></div><div class="ss g"><div class="ssl">Total recoverable value</div><div class="ssv">${fK(m.totalSavings)}</div></div></div><div class="sum-body">${paras.map(p=>`<p>${p}</p>`).join('')}</div><button class="copy-btn" id="copyBtn" onclick="copySummary()">Copy summary text</button></div>`;
   }catch(err){sa.innerHTML=`<div class="summary-wrap"><div class="err">Failed to generate summary: ${err.message}</div></div>`;}
   finally{const b=document.getElementById('genBtn');if(b){b.disabled=false;b.textContent='Regenerate summary';}}
 }
 function copySummary(){
-  const stats=document.querySelector('.sum-stats');const body=document.querySelector('.sum-body');if(!body)return;
-  let t='From Days to Minutes — Executive Summary\n\n';
+  const stats=document.querySelector('.sum-stats'),body=document.querySelector('.sum-body');if(!body)return;
+  let t='The Case for a Unified Analytics Stack\n\n';
   if(stats){stats.querySelectorAll('.ss').forEach(s=>{t+=s.querySelector('.ssl').textContent+': '+s.querySelector('.ssv').textContent+'\n'});t+='\n';}
   t+=body.innerText;
   navigator.clipboard.writeText(t).then(()=>{const btn=document.getElementById('copyBtn');if(btn){btn.textContent='Copied!';setTimeout(()=>{if(btn)btn.textContent='Copy summary text'},2000);}});
