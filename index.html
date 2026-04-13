@@ -1,115 +1,442 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Speed to Insight Calculator</title><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;margin:0;padding:0}:root{--bg:#F4F2ED;--surface:#FFFFFF;--surface2:#ECEAE4;--border:#DDD9D1;--border-strong:#C4BFB6;--text:#18160F;--muted:#7A756C;--muted2:#ABA69E;--red:#C4401E;--red-bg:#FDF0EC;--red-border:#F0C0AE;--green:#1A7850;--green-bg:#EDF7F2;--green-border:#AADDC4;--blue:#1A46A0;--blue-bg:#EEF2FA;--blue-border:#B4C4EC;--amber:#8A5A0C;--amber-bg:#FBF5EA;--amber-border:#E8D09A;--purple:#5E2CA5;--purple-bg:#F3EEFF;--purple-border:#C9B0F0;--r:10px;--rs:6px}body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}.header{background:var(--text);padding:40px 48px 38px;position:relative;overflow:hidden}.header::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,0.05)}.header::after{content:'';position:absolute;top:20px;right:60px;width:160px;height:160px;border-radius:50%;border:1px solid rgba(255,255,255,0.04)}.kicker{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:14px}.header h1{font-family:'Syne',sans-serif;font-size:40px;font-weight:700;line-height:1.05;letter-spacing:-0.02em;color:#F4F2ED;margin-bottom:10px}.header h1 em{color:#E8663A;font-style:normal}.header p{font-size:14px;color:rgba(255,255,255,0.5);max-width:600px;line-height:1.65}.main{display:grid;grid-template-columns:400px 1fr;min-height:calc(100vh - 170px)}.left{background:var(--surface);border-right:1px solid var(--border);padding:28px 28px 40px;overflow-y:auto}.right{padding:28px 32px;background:var(--bg)}.sh{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted);margin:24px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--border)}.sh:first-child{margin-top:0}.sh-note{font-size:10px;color:var(--muted2);margin-bottom:12px;line-height:1.5;font-style:italic}.row-lbl{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--muted);margin:11px 0 4px}.row-lbl b{font-family:'DM Mono',monospace;color:var(--text);font-weight:500;font-size:13px}.row-lbl small{font-size:10px;color:var(--muted2);font-style:italic}input[type=range]{width:100%;height:3px;-webkit-appearance:none;background:var(--border);border-radius:2px;outline:none;cursor:pointer}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;background:var(--text);border-radius:50%;cursor:pointer;transition:transform 0.1s}input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}.range-hints{display:flex;justify-content:space-between;font-size:9px;color:var(--muted2);margin-top:3px}.ctx{background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:var(--rs);padding:10px 12px;font-size:11px;color:var(--blue);line-height:1.6;margin-bottom:16px}.tool-item{border:1px solid var(--border);border-radius:var(--rs);margin-bottom:5px;overflow:hidden;transition:border-color 0.15s}.tool-item.on{border-color:var(--blue-border)}.tool-hdr{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;user-select:none;background:var(--surface2);transition:background 0.15s}.tool-item.on .tool-hdr{background:var(--blue-bg)}.tdot{width:7px;height:7px;border-radius:50%;background:var(--border-strong);flex-shrink:0}.tool-item.on .tdot{background:var(--blue)}.tname{font-size:12px;font-weight:500;flex:1;color:var(--muted)}.tool-item.on .tname{color:var(--blue)}.tex{font-size:10px;color:var(--muted2);font-style:italic}.tool-item.on .tex{color:var(--blue);opacity:0.6}.zs{display:flex;align-items:center;justify-content:center;min-height:400px;color:var(--muted);font-size:14px;text-align:center;flex-direction:column;gap:8px}.zs span{font-size:12px;color:var(--muted2)}.budget-hero{background:var(--text);border-radius:var(--r);padding:22px 26px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}.bh-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.45);margin-bottom:6px}.bh-val{font-family:'Syne',sans-serif;font-size:52px;font-weight:700;color:#E8663A;line-height:1}.bh-sub{font-size:12px;color:rgba(255,255,255,0.45);margin-top:6px;max-width:260px;line-height:1.5}.bh-right{text-align:right}.bh-r-label{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:4px}.bh-r-val{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;color:#FFFFFF;line-height:1}.bh-r-sub{font-size:11px;color:rgba(255,255,255,0.4);margin-top:3px}.hero-time{display:grid;grid-template-columns:1fr auto 1fr;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:16px}.ht-side{padding:18px 22px}.ht-side.left-side{border-right:1px solid var(--border)}.ht-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}.ht-label.bad{color:var(--red)}.ht-label.good{color:var(--green)}.ht-val{font-family:'Syne',sans-serif;font-size:40px;font-weight:700;line-height:1}.ht-val.bad{color:var(--red)}.ht-val.good{color:var(--green)}.ht-unit{font-size:11px;color:var(--muted);margin-top:5px}.ht-arrow{display:flex;align-items:center;justify-content:center;padding:0 14px;background:var(--surface)}.ht-arrow svg{opacity:0.25}.ht-sub{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5}.cost-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}.cost-card{border-radius:var(--rs);padding:14px 16px}.cost-card.c1{background:var(--red-bg);border:1px solid var(--red-border)}.cost-card.c2{background:var(--amber-bg);border:1px solid var(--amber-border)}.cost-card.c3{background:var(--purple-bg);border:1px solid var(--purple-border)}.cc-num{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;opacity:0.6}.cost-card.c1 .cc-num{color:var(--red)}.cost-card.c2 .cc-num{color:var(--amber)}.cost-card.c3 .cc-num{color:var(--purple)}.cc-label{font-size:11px;font-weight:600;margin-bottom:8px}.cost-card.c1 .cc-label{color:var(--red)}.cost-card.c2 .cc-label{color:var(--amber)}.cost-card.c3 .cc-label{color:var(--purple)}.cc-val{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;line-height:1}.cost-card.c1 .cc-val{color:var(--red)}.cost-card.c2 .cc-val{color:var(--amber)}.cost-card.c3 .cc-val{color:var(--purple)}.cc-sub{font-size:10px;margin-top:5px;line-height:1.5;opacity:0.75}.cost-card.c1 .cc-sub{color:var(--red)}.cost-card.c2 .cc-sub{color:var(--amber)}.cost-card.c3 .cc-sub{color:var(--purple)}.total-banner{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 22px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.tb-left .tb-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:3px}.tb-left .tb-sub{font-size:11px;color:var(--muted2)}.tb-val{font-family:'Syne',sans-serif;font-size:36px;font-weight:700;color:var(--green)}.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:13px 15px}.kpi-label{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:5px}.kpi-val{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--text);line-height:1}.kpi-sub{font-size:10px;color:var(--muted2);margin-top:4px;line-height:1.4}.msec{margin-bottom:14px}.msec-title{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)}.mpair{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mbox{border-radius:var(--rs);padding:12px 14px}.ml{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px}.mv{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;line-height:1}.mu{font-size:10px;margin-top:4px}.mbox.r{background:var(--red-bg);border:1px solid var(--red-border)}.mbox.r .ml,.mbox.r .mu{color:var(--red)}.mbox.r .mv{color:var(--red)}.mbox.g{background:var(--green-bg);border:1px solid var(--green-border)}.mbox.g .ml,.mbox.g .mu{color:var(--green)}.mbox.g .mv{color:var(--green)}.badge{display:inline-flex;align-items:center;gap:8px;background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:20px;padding:5px 12px;font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);margin-bottom:14px}.note{font-size:11px;color:var(--muted);background:var(--surface2);border-radius:var(--rs);padding:9px 12px;margin-bottom:12px;line-height:1.5}.gen-btn{width:100%;padding:13px;background:var(--text);border:none;border-radius:var(--rs);font-family:'Syne',sans-serif;font-size:14px;font-weight:600;color:#F4F2ED;cursor:pointer;letter-spacing:0.02em;transition:opacity 0.15s}.gen-btn:hover{opacity:0.82}.gen-btn:disabled{opacity:0.35;cursor:not-allowed}.apikey-row{display:flex;gap:8px;margin-top:10px}.apikey-row input[type=password]{flex:1;padding:9px 12px;border:1px solid var(--border);border-radius:var(--rs);font-family:'DM Mono',monospace;font-size:12px;background:var(--surface);color:var(--text);outline:none}.apikey-row input[type=password]:focus{border-color:var(--border-strong)}.apikey-hint{font-size:10px;color:var(--muted2);margin-top:5px;line-height:1.5}.summary-wrap{background:var(--surface);border-top:1px solid var(--border);padding:44px 48px 48px}.summary-wrap h2{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:4px}.sum-date{font-size:11px;font-family:'DM Mono',monospace;color:var(--muted);margin-bottom:26px}.sum-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:30px}.ss{background:var(--bg);border-radius:var(--rs);padding:14px}.ssl{font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:5px}.ssv{font-family:'Syne',sans-serif;font-size:22px;font-weight:700}.ss.r .ssv{color:var(--red)}.ss.g .ssv{color:var(--green)}.ss.a .ssv{color:var(--amber)}.ss.p .ssv{color:var(--purple)}.sum-body{font-size:15px;line-height:1.85;color:var(--text);max-width:820px}.sum-body p{margin-bottom:1.1rem}.sum-body p:last-child{margin:0}.loading{display:flex;align-items:center;gap:10px;padding:40px 0;font-size:14px;color:var(--muted)}.spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--text);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}@keyframes spin{to{transform:rotate(360deg)}}.err{background:var(--red-bg);border:1px solid var(--red-border);border-radius:var(--rs);padding:12px 16px;font-size:13px;color:var(--red)}.copy-btn{margin-top:22px;padding:9px 20px;background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);font-size:13px;color:var(--muted);cursor:pointer;transition:all 0.15s;font-family:'DM Sans',sans-serif}.copy-btn:hover{border-color:var(--border-strong);color:var(--text)}.footer{background:var(--surface2);border-top:1px solid var(--border);padding:14px 48px;font-size:10.5px;color:var(--muted);line-height:1.7}@media(max-width:900px){.main{grid-template-columns:1fr}.left{border-right:none;border-bottom:1px solid var(--border)}.cost-grid,.kpi-row{grid-template-columns:1fr 1fr}.sum-stats{grid-template-columns:1fr 1fr}.header{padding:28px 24px}.header h1{font-size:30px}.summary-wrap{padding:28px 24px}.footer{padding:14px 24px}}</style></head><body><div class="header"><div class="kicker">// Analytics fragmentation cost</div><h1>What your fragmented stack <em>actually</em> costs.</h1><p>Three auditable cost drivers &mdash; analyst capacity locked in reconciliation, an engineering integration tax, and a decision-lag penalty on every stakeholder waiting for an answer. Built to hold up in a CFO conversation.</p></div><div class="main"><div class="left"><div class="ctx">Scale this to your org. Every number is explainable line-by-line with published benchmarks.</div><div class="sh">Your current analytics tools</div><div id="toolList"></div><div class="sh">Analytics &amp; data team</div><div class="sh-note">The people who build, maintain, and answer questions with data.</div><div class="row-lbl">Analytics / data analysts <b id="analystsV">50</b></div><input type="range" min="5" max="500" value="50" id="analysts" step="5"><div class="range-hints"><span>5</span><span>enterprise avg: 80&ndash;150</span><span>500</span></div><div class="row-lbl">Analyst time on prep &amp; reconciliation today <b id="prepV">40%</b></div><input type="range" min="15" max="70" value="40" id="prep" step="5"><div class="range-hints"><span>15%</span><span>Anaconda avg: 45%</span><span>70%</span></div><div class="row-lbl">Data engineers maintaining integrations <b id="dengV">8</b></div><input type="range" min="1" max="80" value="8" id="deng" step="1"><div class="row-lbl">% of data eng time on integration upkeep <b id="dmaintV">30%</b></div><input type="range" min="10" max="60" value="30" id="dmaint" step="5"><div class="range-hints"><span>10%</span><span>typical: 25&ndash;35%</span><span>60%</span></div><div class="sh">Salaries &amp; compensation</div><div class="row-lbl">Analyst fully-loaded cost <b id="acostV">$160K</b></div><input type="range" min="80000" max="400000" value="160000" id="acost" step="5000"><div class="row-lbl">Data engineer fully-loaded cost <b id="dcostV">$210K</b></div><input type="range" min="100000" max="500000" value="210000" id="dcost" step="5000"><div class="sh">Decision demand</div><div class="row-lbl">Insight requests per week <b id="reqV">100</b></div><input type="range" min="5" max="2000" value="100" id="req" step="5"><div class="range-hints"><span>5</span><span>enterprise avg: 80&ndash;300</span><span>2000</span></div><div class="row-lbl">Stakeholders waiting per answer <b id="waitV">6</b></div><input type="range" min="1" max="30" value="6" id="wait" step="1"><div class="row-lbl">Current days to answer a data question <b id="daysV">3</b></div><input type="range" min="1" max="14" value="3" id="days" step="0.5"></div><div class="right"><div id="outputArea"><div class="zs">Select 2 or more tools to calculate your cost.<span>Every number is auditable &mdash; no black boxes.</span></div></div></div></div><div id="summaryArea" style="display:none"></div><div class="footer"><strong>Methodology &mdash;</strong><strong>Cost 1 (Analyst capacity):</strong> analysts &times; salary &times; (prep% &minus; 15% unified baseline). Prep% source: Anaconda State of Data Science 2023 (45% avg). &nbsp;<strong>Cost 2 (Engineering integration tax):</strong> data engineers &times; salary &times; maintenance%. &nbsp;<strong>Cost 3 (Decision-lag tax):</strong> requests/wk &times; 52 &times; stakeholders &times; hourly &times; lag days &times; 8hrs &times; 15% context-switch factor (Gloria Mark, UCI). &nbsp;<strong>Budget overhead ratio:</strong> (Cost 1 + Cost 2) &divide; total analytics team budget. &nbsp;<strong>Experiment capacity:</strong> freed analyst hrs/yr &divide; 40hrs per experiment cycle.</div><script>
-const TOOLS=[{id:'analytics',label:'Product analytics',ex:'Mixpanel, Heap, GA4'},{id:'abtesting',label:'A/B testing / experimentation',ex:'Optimizely, VWO, Statsig'},{id:'replay',label:'Session replay',ex:'FullStory, LogRocket, Hotjar'},{id:'flags',label:'Feature flags',ex:'LaunchDarkly, Split'},{id:'cdp',label:'CDP / data pipeline',ex:'Segment, mParticle'},{id:'attribution',label:'Marketing attribution',ex:'Rockerbox, Northbeam'},{id:'bi',label:'BI / dashboarding',ex:'Looker, Tableau, Mode'},{id:'warehouse',label:'Data warehouse',ex:'Fivetran → Snowflake / BQ'}];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speed to Insight Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F4F2ED;--surface:#FFFFFF;--surface2:#ECEAE4;
+  --border:#DDD9D1;--border-strong:#C4BFB6;
+  --text:#18160F;--muted:#7A756C;--muted2:#ABA69E;
+  --red:#C4401E;--red-bg:#FDF0EC;--red-border:#F0C0AE;
+  --green:#1A7850;--green-bg:#EDF7F2;--green-border:#AADDC4;
+  --blue:#1A46A0;--blue-bg:#EEF2FA;--blue-border:#B4C4EC;
+  --amber:#8A5A0C;--amber-bg:#FBF5EA;--amber-border:#E8D09A;
+  --purple:#5E2CA5;--purple-bg:#F3EEFF;--purple-border:#C9B0F0;
+  --r:10px;--rs:6px;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+.header{background:var(--text);padding:40px 48px 38px;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;border:1px solid rgba(255,255,255,0.05)}
+.header::after{content:'';position:absolute;top:20px;right:60px;width:160px;height:160px;border-radius:50%;border:1px solid rgba(255,255,255,0.04)}
+.kicker{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:14px}
+.header h1{font-family:'Syne',sans-serif;font-size:40px;font-weight:700;line-height:1.05;letter-spacing:-0.02em;color:#F4F2ED;margin-bottom:10px}
+.header h1 em{color:#E8663A;font-style:normal}
+.header p{font-size:14px;color:rgba(255,255,255,0.5);max-width:600px;line-height:1.65}
+
+.main{display:grid;grid-template-columns:400px 1fr;min-height:calc(100vh - 170px)}
+.left{background:var(--surface);border-right:1px solid var(--border);padding:28px 28px 40px;overflow-y:auto}
+.right{padding:28px 32px;background:var(--bg)}
+
+.sh{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--muted);margin:24px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.sh:first-child{margin-top:0}
+.sh-note{font-size:10px;color:var(--muted2);margin-bottom:12px;line-height:1.5;font-style:italic}
+
+.row-lbl{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--muted);margin:11px 0 4px}
+.row-lbl b{font-family:'DM Mono',monospace;color:var(--text);font-weight:500;font-size:13px}
+.row-lbl small{font-size:10px;color:var(--muted2);font-style:italic}
+input[type=range]{width:100%;height:3px;-webkit-appearance:none;background:var(--border);border-radius:2px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;background:var(--text);border-radius:50%;cursor:pointer;transition:transform 0.1s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+.range-hints{display:flex;justify-content:space-between;font-size:9px;color:var(--muted2);margin-top:3px}
+
+.ctx{background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:var(--rs);padding:10px 12px;font-size:11px;color:var(--blue);line-height:1.6;margin-bottom:16px}
+
+.tool-item{border:1px solid var(--border);border-radius:var(--rs);margin-bottom:5px;overflow:hidden;transition:border-color 0.15s}
+.tool-item.on{border-color:var(--blue-border)}
+.tool-hdr{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;user-select:none;background:var(--surface2);transition:background 0.15s}
+.tool-item.on .tool-hdr{background:var(--blue-bg)}
+.tdot{width:7px;height:7px;border-radius:50%;background:var(--border-strong);flex-shrink:0}
+.tool-item.on .tdot{background:var(--blue)}
+.tname{font-size:12px;font-weight:500;flex:1;color:var(--muted)}
+.tool-item.on .tname{color:var(--blue)}
+.tex{font-size:10px;color:var(--muted2);font-style:italic}
+.tool-item.on .tex{color:var(--blue);opacity:0.6}
+
+.zs{display:flex;align-items:center;justify-content:center;min-height:400px;color:var(--muted);font-size:14px;text-align:center;flex-direction:column;gap:8px}
+.zs span{font-size:12px;color:var(--muted2)}
+
+.budget-hero{background:var(--text);border-radius:var(--r);padding:22px 26px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
+.bh-left{}
+.bh-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.45);margin-bottom:6px}
+.bh-val{font-family:'Syne',sans-serif;font-size:52px;font-weight:700;color:#E8663A;line-height:1}
+.bh-sub{font-size:12px;color:rgba(255,255,255,0.45);margin-top:6px;max-width:260px;line-height:1.5}
+.bh-right{text-align:right}
+.bh-r-label{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.35);margin-bottom:4px}
+.bh-r-val{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;color:#FFFFFF;line-height:1}
+.bh-r-sub{font-size:11px;color:rgba(255,255,255,0.4);margin-top:3px}
+
+.hero-time{display:grid;grid-template-columns:1fr auto 1fr;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.ht-side{padding:18px 22px}
+.ht-side.left-side{border-right:1px solid var(--border)}
+.ht-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px}
+.ht-label.bad{color:var(--red)}
+.ht-label.good{color:var(--green)}
+.ht-val{font-family:'Syne',sans-serif;font-size:40px;font-weight:700;line-height:1}
+.ht-val.bad{color:var(--red)}
+.ht-val.good{color:var(--green)}
+.ht-unit{font-size:11px;color:var(--muted);margin-top:5px}
+.ht-arrow{display:flex;align-items:center;justify-content:center;padding:0 14px;background:var(--surface)}
+.ht-arrow svg{opacity:0.25}
+.ht-sub{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5}
+.cost-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+.cost-card{border-radius:var(--rs);padding:14px 16px}
+.cost-card.c1{background:var(--red-bg);border:1px solid var(--red-border)}
+.cost-card.c2{background:var(--amber-bg);border:1px solid var(--amber-border)}
+.cost-card.c3{background:var(--purple-bg);border:1px solid var(--purple-border)}
+.cc-num{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;opacity:0.6}
+.cost-card.c1 .cc-num{color:var(--red)}
+.cost-card.c2 .cc-num{color:var(--amber)}
+.cost-card.c3 .cc-num{color:var(--purple)}
+.cc-label{font-size:11px;font-weight:600;margin-bottom:8px}
+.cost-card.c1 .cc-label{color:var(--red)}
+.cost-card.c2 .cc-label{color:var(--amber)}
+.cost-card.c3 .cc-label{color:var(--purple)}
+.cc-val{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;line-height:1}
+.cost-card.c1 .cc-val{color:var(--red)}
+.cost-card.c2 .cc-val{color:var(--amber)}
+.cost-card.c3 .cc-val{color:var(--purple)}
+.cc-sub{font-size:10px;margin-top:5px;line-height:1.5;opacity:0.75}
+.cost-card.c1 .cc-sub{color:var(--red)}
+.cost-card.c2 .cc-sub{color:var(--amber)}
+.cost-card.c3 .cc-sub{color:var(--purple)}
+
+.total-banner{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 22px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.tb-left .tb-label{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:3px}
+.tb-left .tb-sub{font-size:11px;color:var(--muted2)}
+.tb-val{font-family:'Syne',sans-serif;font-size:36px;font-weight:700;color:var(--green)}
+
+.kpi-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:13px 15px}
+.kpi-label{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:5px}
+.kpi-val{font-family:'Syne',sans-serif;font-size:24px;font-weight:700;color:var(--text);line-height:1}
+.kpi-sub{font-size:10px;color:var(--muted2);margin-top:4px;line-height:1.4}
+
+.msec{margin-bottom:14px}
+.msec-title{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.mpair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mbox{border-radius:var(--rs);padding:12px 14px}
+.ml{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px}
+.mv{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;line-height:1}
+.mu{font-size:10px;margin-top:4px}
+.mbox.r{background:var(--red-bg);border:1px solid var(--red-border)}
+.mbox.r .ml,.mbox.r .mu{color:var(--red)}
+.mbox.r .mv{color:var(--red)}
+.mbox.g{background:var(--green-bg);border:1px solid var(--green-border)}
+.mbox.g .ml,.mbox.g .mu{color:var(--green)}
+.mbox.g .mv{color:var(--green)}
+
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--blue-bg);border:1px solid var(--blue-border);border-radius:20px;padding:5px 12px;font-size:11px;font-family:'DM Mono',monospace;color:var(--blue);margin-bottom:14px}
+
+.note{font-size:11px;color:var(--muted);background:var(--surface2);border-radius:var(--rs);padding:9px 12px;margin-bottom:12px;line-height:1.5}
+
+
+.footer{background:var(--surface2);border-top:1px solid var(--border);padding:14px 48px;font-size:10.5px;color:var(--muted);line-height:1.7}
+
+@media(max-width:900px){
+  .main{grid-template-columns:1fr}
+  .left{border-right:none;border-bottom:1px solid var(--border)}
+  .cost-grid,.kpi-row{grid-template-columns:1fr 1fr}
+  .header{padding:28px 24px}.header h1{font-size:30px}
+  .footer{padding:14px 24px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="kicker">// Analytics fragmentation cost</div>
+  <h1>What your fragmented stack <em>actually</em> costs.</h1>
+  <p>Three auditable cost drivers — analyst capacity locked in reconciliation, an engineering integration tax, and a decision-lag penalty on every stakeholder waiting for an answer. Built to hold up in a CFO conversation.</p>
+</div>
+
+<div class="main">
+  <div class="left">
+
+    <div class="ctx">Scale this to your org. Every number is explainable line-by-line with published benchmarks.</div>
+
+    <div class="sh">Your current analytics tools</div>
+    <div id="toolList"></div>
+
+    <div class="sh">Analytics &amp; data team</div>
+    <div class="sh-note">The people who build, maintain, and answer questions with data.</div>
+
+    <div class="row-lbl">Analytics / data analysts <b id="analystsV">50</b></div>
+    <input type="range" min="5" max="500" value="50" id="analysts" step="5">
+    <div class="range-hints"><span>5</span><span>enterprise avg: 80–150</span><span>500</span></div>
+
+    <div class="row-lbl">Analyst time on prep &amp; reconciliation today <b id="prepV">40%</b></div>
+    <input type="range" min="15" max="70" value="40" id="prep" step="5">
+    <div class="range-hints"><span>15%</span><span>Anaconda avg: 45%</span><span>70%</span></div>
+
+    <div class="row-lbl">Data engineers maintaining integrations <b id="dengV">8</b></div>
+    <input type="range" min="1" max="80" value="8" id="deng" step="1">
+
+    <div class="row-lbl">% of data eng time on integration upkeep <b id="dmaintV">30%</b></div>
+    <input type="range" min="10" max="60" value="30" id="dmaint" step="5">
+    <div class="range-hints"><span>10%</span><span>typical: 25–35%</span><span>60%</span></div>
+
+    <div class="sh">Salaries &amp; compensation</div>
+
+    <div class="row-lbl">Analyst fully-loaded cost <b id="acostV">$160K</b></div>
+    <input type="range" min="80000" max="400000" value="160000" id="acost" step="5000">
+
+    <div class="row-lbl">Data engineer fully-loaded cost <b id="dcostV">$210K</b></div>
+    <input type="range" min="100000" max="500000" value="210000" id="dcost" step="5000">
+
+    <div class="sh">Decision demand</div>
+
+    <div class="row-lbl">Insight requests per week <b id="reqV">100</b></div>
+    <input type="range" min="5" max="2000" value="100" id="req" step="5">
+    <div class="range-hints"><span>5</span><span>enterprise avg: 80–300</span><span>2000</span></div>
+
+    <div class="row-lbl">Stakeholders waiting per answer <b id="waitV">6</b></div>
+    <input type="range" min="1" max="30" value="6" id="wait" step="1">
+
+    <div class="row-lbl">Current days to answer a data question <b id="daysV">3</b></div>
+    <input type="range" min="1" max="14" value="3" id="days" step="0.5">
+
+  </div>
+
+  <div class="right">
+    <div id="outputArea">
+      <div class="zs">
+        Select 2 or more tools to calculate your cost.
+        <span>Every number is auditable — no black boxes.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <strong>Methodology —</strong>
+  <strong>Cost 1 (Analyst capacity):</strong> analysts &times; salary &times; (prep% &minus; 15% unified baseline). Prep% source: Anaconda State of Data Science 2023 (45% avg). Unified baseline 15% from Amplitude customer benchmarks. &nbsp;
+  <strong>Cost 2 (Integration engineering tax):</strong> data engineers &times; salary &times; maintenance%. Maintenance% reflects time spent on pipeline upkeep, schema drift, and cross-tool reconciliation for N&times;(N&minus;1)/2 integration pairs. &nbsp;
+  <strong>Cost 3 (Decision-lag tax):</strong> requests/wk &times; 52 &times; stakeholders &times; analyst hourly &times; lag days &times; 8hrs &times; 15% context-switch factor. 15% = interruption + re-briefing cost, not idle time (Gloria Mark, UCI). &nbsp;
+  <strong>Budget overhead ratio:</strong> total cost &divide; total analytics team budget (analysts + data engineers). &nbsp;
+  <strong>Experiment capacity:</strong> freed analyst hrs/yr &divide; 40hrs per experiment cycle (industry avg for instrumentation + analysis).
+</div>
+
+<script>
+const TOOLS=[
+  {id:'analytics',label:'Product analytics',ex:'Mixpanel, Heap, GA4'},
+  {id:'abtesting',label:'A/B testing / experimentation',ex:'Optimizely, VWO, Statsig'},
+  {id:'replay',label:'Session replay',ex:'FullStory, LogRocket, Hotjar'},
+  {id:'flags',label:'Feature flags',ex:'LaunchDarkly, Split'},
+  {id:'cdp',label:'CDP / data pipeline',ex:'Segment, mParticle'},
+  {id:'attribution',label:'Marketing attribution',ex:'Rockerbox, Northbeam'},
+  {id:'bi',label:'BI / dashboarding',ex:'Looker, Tableau, Mode'},
+  {id:'warehouse',label:'Data warehouse',ex:'Fivetran → Snowflake / BQ'},
+];
 const sel=new Set(['analytics','abtesting','replay']);
 const tl=document.getElementById('toolList');
-TOOLS.forEach(t=>{const item=document.createElement('div');item.className='tool-item'+(sel.has(t.id)?' on':'');const hdr=document.createElement('div');hdr.className='tool-hdr';hdr.innerHTML=`<span class="tdot"></span><span class="tname">${t.label}</span><span class="tex">${t.ex}</span>`;hdr.addEventListener('click',()=>{sel.has(t.id)?sel.delete(t.id):sel.add(t.id);item.className='tool-item'+(sel.has(t.id)?' on':'');render();});item.appendChild(hdr);tl.appendChild(item);});
-function fK(n){if(n>=1000000000)return '$'+(n/1000000000).toFixed(1)+'B';if(n>=1000000)return '$'+(n/1000000).toFixed(1)+'M';if(n>=1000)return '$'+(n/1000).toFixed(0)+'K';return '$'+Math.round(n);}
-function fN(n){return Math.round(n).toLocaleString();}
-let lastM=null;
-function getM(){
-  const n=sel.size;if(n<=1)return null;
-  const analysts=parseInt(document.getElementById('analysts').value);
-  const prepPct=parseInt(document.getElementById('prep').value)/100;
-  const deng=parseInt(document.getElementById('deng').value);
-  const dmaint=parseInt(document.getElementById('dmaint').value)/100;
-  const acost=parseInt(document.getElementById('acost').value);
-  const dcost=parseInt(document.getElementById('dcost').value);
-  const req=parseInt(document.getElementById('req').value);
-  const wait=parseInt(document.getElementById('wait').value);
-  const days=parseFloat(document.getElementById('days').value);
-  const pairs=n*(n-1)/2;
-  const UNIFIED_PREP=0.15,UNIFIED_DAYS=0.125,UNIFIED_DMAINT=0.05,CONTEXT_TAX=0.15;
-  const ANALYST_HOURLY=acost/2080;
-  const prepDelta=Math.max(prepPct-UNIFIED_PREP,0);
-  const c1=analysts*acost*prepDelta;
-  const analystFTE=(analysts*prepDelta).toFixed(1);
-  const analystHrsWkSaved=Math.round(analysts*prepDelta*40);
-  const analystHrsWkToday=Math.round(analysts*prepPct*40);
-  const analystHrsWkUnified=Math.round(analysts*UNIFIED_PREP*40);
-  const dmaintDelta=Math.max(dmaint-UNIFIED_DMAINT,0);
-  const c2=deng*dcost*dmaintDelta;
-  const dengFTE=(deng*dmaintDelta).toFixed(1);
-  const dengHrsWkSaved=Math.round(deng*dmaintDelta*40);
-  const lagDays=Math.max(days-UNIFIED_DAYS,0);
-  const c3=req*52*wait*ANALYST_HOURLY*lagDays*8*CONTEXT_TAX;
-  const totalSavings=c1+c2+c3;
-  const totalBudget=(analysts*acost)+(deng*dcost);
-  const overheadRatio=Math.round((c1+c2)/totalBudget*100);
-  const freedAnalystHrsYr=analystHrsWkSaved*52;
-  const newExperiments=Math.round(freedAnalystHrsYr/40);
-  const currentExpPerYr=Math.round(req*52/5);
-  const decisionsPerYear=req*52;
-  const weeksLost=Math.round(lagDays*req*52/5);
-  return{n,pairs,analysts,prepPct,deng,dmaint,acost,dcost,req,wait,days,c1,c2,c3,totalSavings,totalBudget,overheadRatio,analystFTE,dengFTE,analystHrsWkSaved,analystHrsWkToday,analystHrsWkUnified,dengHrsWkSaved,newExperiments,currentExpPerYr,decisionsPerYear,weeksLost,lagDays,prepDelta,dmaintDelta};
+TOOLS.forEach(t=>{
+  const item=document.createElement('div');
+  item.className='tool-item'+(sel.has(t.id)?' on':'');
+  const hdr=document.createElement('div');
+  hdr.className='tool-hdr';
+  hdr.innerHTML=`<span class="tdot"></span><span class="tname">${t.label}</span><span class="tex">${t.ex}</span>`;
+  hdr.addEventListener('click',()=>{
+    sel.has(t.id)?sel.delete(t.id):sel.add(t.id);
+    item.className='tool-item'+(sel.has(t.id)?' on':'');
+    render();
+  });
+  item.appendChild(hdr); tl.appendChild(item);
+});
+
+function fK(n){
+  if(n>=1000000000)return '$'+(n/1000000000).toFixed(1)+'B';
+  if(n>=1000000)return '$'+(n/1000000).toFixed(1)+'M';
+  if(n>=1000)return '$'+(n/1000).toFixed(0)+'K';
+  return '$'+Math.round(n);
 }
-function mbox(cls,label,val,unit){return `<div class="mbox ${cls}"><div class="ml">${label}</div><div class="mv">${val}</div><div class="mu">${unit}</div></div>`;}
+function fN(n){return Math.round(n).toLocaleString();}
+
+function getM(){
+  const n=sel.size; if(n<=1)return null;
+
+  const analysts  = parseInt(document.getElementById('analysts').value);
+  const prepPct   = parseInt(document.getElementById('prep').value)/100;
+  const deng      = parseInt(document.getElementById('deng').value);
+  const dmaint    = parseInt(document.getElementById('dmaint').value)/100;
+  const acost     = parseInt(document.getElementById('acost').value);
+  const dcost     = parseInt(document.getElementById('dcost').value);
+  const req       = parseInt(document.getElementById('req').value);
+  const wait      = parseInt(document.getElementById('wait').value);
+  const days      = parseFloat(document.getElementById('days').value);
+  const pairs     = n*(n-1)/2;
+
+  const UNIFIED_PREP   = 0.15;
+  const UNIFIED_DAYS   = 0.125;
+  const UNIFIED_DMAINT = 0.05;
+  const CONTEXT_TAX    = 0.15;
+  const ANALYST_HOURLY = acost / 2080;
+
+  const prepDelta    = Math.max(prepPct - UNIFIED_PREP, 0);
+  const c1           = analysts * acost * prepDelta;
+  const analystFTE   = (analysts * prepDelta).toFixed(1);
+  const analystHrsWkSaved = Math.round(analysts * prepDelta * 40);
+  const analystHrsWkToday = Math.round(analysts * prepPct * 40);
+  const analystHrsWkUnified = Math.round(analysts * UNIFIED_PREP * 40);
+
+  const dmaintDelta  = Math.max(dmaint - UNIFIED_DMAINT, 0);
+  const c2           = deng * dcost * dmaintDelta;
+  const dengFTE      = (deng * dmaintDelta).toFixed(1);
+  const dengHrsWkSaved = Math.round(deng * dmaintDelta * 40);
+
+  const lagDays      = Math.max(days - UNIFIED_DAYS, 0);
+  const c3           = req * 52 * wait * ANALYST_HOURLY * lagDays * 8 * CONTEXT_TAX;
+
+  const totalSavings    = c1 + c2 + c3;
+  const totalBudget     = (analysts * acost) + (deng * dcost);
+  const overheadRatio   = Math.round((c1 + c2) / totalBudget * 100);
+
+  const freedAnalystHrsYr = analystHrsWkSaved * 52;
+  const newExperiments    = Math.round(freedAnalystHrsYr / 40);
+  const currentExpPerYr   = Math.round(req * 52 / 5);
+  const decisionsPerYear = req * 52;
+  const weeksLost        = Math.round(lagDays * req * 52 / 5);
+
+  return{
+    n, pairs,
+    analysts, prepPct, deng, dmaint, acost, dcost, req, wait, days,
+    c1, c2, c3, totalSavings, totalBudget, overheadRatio,
+    analystFTE, dengFTE,
+    analystHrsWkSaved, analystHrsWkToday, analystHrsWkUnified, dengHrsWkSaved,
+    newExperiments, currentExpPerYr,
+    decisionsPerYear, weeksLost, lagDays,
+    prepDelta, dmaintDelta,
+  };
+}
+
+function mbox(cls,label,val,unit){
+  return `<div class="mbox ${cls}"><div class="ml">${label}</div><div class="mv">${val}</div><div class="mu">${unit}</div></div>`;
+}
+
 function render(){
-  const m=getM();lastM=m;
+  const m=getM();
   const oa=document.getElementById('outputArea');
-  if(!m){oa.innerHTML='<div class="zs">Select 2 or more tools to calculate your cost.<span>Every number is auditable &mdash; no black boxes.</span></div>';document.getElementById('summaryArea').style.display='none';return;}
+  if(!m){
+    oa.innerHTML='<div class="zs">Select 2 or more tools to calculate your cost.<span>Every number is auditable — no black boxes.</span></div>';
+    return;
+  }
+
   oa.innerHTML=`
     <div class="badge">${m.n} tools &rarr; <strong>${m.pairs}</strong> integration pairs &rarr; every answer crosses ${m.pairs} validation boundaries</div>
+
     <div class="budget-hero">
-      <div class="bh-left"><div class="bh-label">Analytics budget lost to fragmentation overhead</div><div class="bh-val">${m.overheadRatio}%</div><div class="bh-sub">Of your ${fK(m.totalBudget)} analytics team budget is consumed by reconciliation and integration upkeep &mdash; before a single insight is produced.</div></div>
-      <div class="bh-right"><div class="bh-r-label">Total recoverable value</div><div class="bh-r-val">${fK(m.totalSavings)}</div><div class="bh-r-sub">annual &mdash; 3 auditable buckets</div></div>
+      <div class="bh-left">
+        <div class="bh-label">Analytics budget lost to fragmentation overhead</div>
+        <div class="bh-val">${m.overheadRatio}%</div>
+        <div class="bh-sub">Of your ${fK(m.totalBudget)} analytics team budget is consumed by reconciliation and integration upkeep — before a single insight is produced.</div>
+      </div>
+      <div class="bh-right">
+        <div class="bh-r-label">Total recoverable value</div>
+        <div class="bh-r-val">${fK(m.totalSavings)}</div>
+        <div class="bh-r-sub">annual — 3 auditable buckets</div>
+      </div>
     </div>
+
     <div class="hero-time">
-      <div class="ht-side left-side"><div class="ht-label bad">Today &mdash; fragmented</div><div class="ht-val bad">${m.days%1===0?m.days:m.days.toFixed(1)}</div><div class="ht-unit">days to answer a data question</div><div class="ht-sub">${fN(m.decisionsPerYear)} decisions/yr delayed &mdash; ${m.weeksLost} working weeks of lag</div></div>
+      <div class="ht-side left-side">
+        <div class="ht-label bad">Today — fragmented</div>
+        <div class="ht-val bad">${m.days%1===0?m.days:m.days.toFixed(1)}</div>
+        <div class="ht-unit">days to answer a data question</div>
+        <div class="ht-sub">${fN(m.decisionsPerYear)} decisions/yr delayed — ${m.weeksLost} working weeks of lag</div>
+      </div>
       <div class="ht-arrow"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="#18160F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="ht-side"><div class="ht-label good">Unified platform</div><div class="ht-val good">~1</div><div class="ht-unit">hour to answer the same question</div><div class="ht-sub">Single data model. No cross-tool validation. Ask, answer, act.</div></div>
+      <div class="ht-side">
+        <div class="ht-label good">Unified platform</div>
+        <div class="ht-val good">~1</div>
+        <div class="ht-unit">hour to answer the same question</div>
+        <div class="ht-sub">Single data model. No cross-tool validation. Ask, answer, act.</div>
+      </div>
     </div>
+
     <div class="cost-grid">
-      <div class="cost-card c1"><div class="cc-num">Cost 01</div><div class="cc-label">Analyst capacity lost to reconciliation</div><div class="cc-val">${fK(m.c1)}</div><div class="cc-sub">${m.analysts} analysts &times; ${Math.round(m.prepPct*100)}% prep &minus; 15% baseline &times; ${fK(m.acost)}</div></div>
-      <div class="cost-card c3"><div class="cc-num">Cost 02</div><div class="cc-label">Engineering integration maintenance tax</div><div class="cc-val">${fK(m.c2)}</div><div class="cc-sub">${m.deng} data engineers &times; ${Math.round(m.dmaint*100)}% upkeep &minus; 5% baseline &times; ${fK(m.dcost)}</div></div>
-      <div class="cost-card c2"><div class="cc-num">Cost 03</div><div class="cc-label">Decision-lag tax on stakeholders</div><div class="cc-val">${fK(m.c3)}</div><div class="cc-sub">${m.req} req/wk &times; ${m.wait} people &times; ${m.lagDays.toFixed(1)}d lag &times; 15% interrupt factor</div></div>
+      <div class="cost-card c1">
+        <div class="cc-num">Cost 01</div>
+        <div class="cc-label">Analyst capacity lost to reconciliation</div>
+        <div class="cc-val">${fK(m.c1)}</div>
+        <div class="cc-sub">${m.analysts} analysts &times; ${Math.round(m.prepPct*100)}% prep &minus; 15% baseline &times; ${fK(m.acost)}</div>
+      </div>
+      <div class="cost-card c3">
+        <div class="cc-num">Cost 02</div>
+        <div class="cc-label">Engineering integration maintenance tax</div>
+        <div class="cc-val">${fK(m.c2)}</div>
+        <div class="cc-sub">${m.deng} data engineers &times; ${Math.round(m.dmaint*100)}% upkeep &minus; 5% baseline &times; ${fK(m.dcost)}</div>
+      </div>
+      <div class="cost-card c2">
+        <div class="cc-num">Cost 03</div>
+        <div class="cc-label">Decision-lag tax on stakeholders</div>
+        <div class="cc-val">${fK(m.c3)}</div>
+        <div class="cc-sub">${m.req} req/wk &times; ${m.wait} people &times; ${m.lagDays.toFixed(1)}d lag &times; 15% interrupt factor</div>
+      </div>
     </div>
-    <div class="total-banner"><div class="tb-left"><div class="tb-label">Total recoverable value &mdash; annual</div><div class="tb-sub">Three auditable buckets. Conservative factors. Built to survive CFO scrutiny.</div></div><div class="tb-val">${fK(m.totalSavings)}</div></div>
+
+    <div class="total-banner">
+      <div class="tb-left">
+        <div class="tb-label">Total recoverable value — annual</div>
+        <div class="tb-sub">Three auditable buckets. Conservative factors. Built to survive CFO scrutiny.</div>
+      </div>
+      <div class="tb-val">${fK(m.totalSavings)}</div>
+    </div>
+
     <div class="kpi-row">
-      <div class="kpi"><div class="kpi-label">Analyst FTEs unlocked</div><div class="kpi-val">${m.analystFTE}</div><div class="kpi-sub">${m.analystHrsWkSaved} hrs/week recaptured from prep &mdash; redirected to real analysis</div></div>
-      <div class="kpi"><div class="kpi-label">New experiments possible / yr</div><div class="kpi-val">+${fN(m.newExperiments)}</div><div class="kpi-sub">From freed analyst hours &divide; 40hr experiment cycle</div></div>
-      <div class="kpi"><div class="kpi-label">Eng FTEs off integration upkeep</div><div class="kpi-val">${m.dengFTE}</div><div class="kpi-sub">${m.dengHrsWkSaved} hrs/week freed from pipeline maintenance</div></div>
+      <div class="kpi">
+        <div class="kpi-label">Analyst FTEs unlocked</div>
+        <div class="kpi-val">${m.analystFTE}</div>
+        <div class="kpi-sub">${m.analystHrsWkSaved} hrs/week recaptured from prep — redirected to real analysis</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">New experiments possible / yr</div>
+        <div class="kpi-val">+${fN(m.newExperiments)}</div>
+        <div class="kpi-sub">From freed analyst hours &divide; 40hr experiment cycle</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Eng FTEs off integration upkeep</div>
+        <div class="kpi-val">${m.dengFTE}</div>
+        <div class="kpi-sub">${m.dengHrsWkSaved} hrs/week freed from pipeline maintenance</div>
+      </div>
     </div>
-    <div class="msec"><div class="msec-title">Analyst hours / week &mdash; prep vs. real work</div><div class="mpair">${mbox('r','Fragmented &mdash; today',m.analystHrsWkToday,'hrs/wk on reconciliation ('+Math.round(m.prepPct*100)+'% of capacity)')}${mbox('g','Unified platform',m.analystHrsWkUnified,'hrs/wk prep &mdash; 85% on actual analysis')}</div></div>
-    <div class="msec"><div class="msec-title">Data engineering hours / week &mdash; integration upkeep</div><div class="mpair">${mbox('r','Fragmented &mdash; today',Math.round(m.deng*m.dmaint*40),'hrs/wk maintaining '+m.pairs+' integration pairs')}${mbox('g','Unified platform',Math.round(m.deng*0.05*40),'hrs/wk &mdash; one platform, one schema')}</div></div>
-    <div class="note"><strong>How to read these numbers:</strong> Cost 1 and Cost 2 use only headcount, published time benchmarks, and salary inputs &mdash; walk through them line-by-line with a finance team. Cost 3 uses a 15% context-switch factor, not full idle time. The overhead ratio is the most executive-ready number: what % of your analytics investment funds complexity instead of insight.</div>
-    <button class="gen-btn" id="genBtn" onclick="generateSummary()">Generate executive summary</button>
-    <div class="apikey-row"><input type="password" id="apiKeyInput" placeholder="Anthropic API key (sk-ant-...)" autocomplete="off"></div>
-    <div class="apikey-hint">Your key is used only to call the Anthropic API directly from your browser &mdash; never stored or sent anywhere else.</div>
+
+    <div class="msec"><div class="msec-title">Analyst hours / week — data prep vs. real work</div><div class="mpair">
+      ${mbox('r','Fragmented — today',m.analystHrsWkToday,'hrs/wk on reconciliation ('+Math.round(m.prepPct*100)+'% of capacity)')}
+      ${mbox('g','Unified platform',m.analystHrsWkUnified,'hrs/wk prep — 85% on actual analysis')}
+    </div></div>
+
+    <div class="msec"><div class="msec-title">Data engineering hours / week — integration upkeep</div><div class="mpair">
+      ${mbox('r','Fragmented — today',Math.round(m.deng*m.dmaint*40),'hrs/wk maintaining '+m.pairs+' integration pairs')}
+      ${mbox('g','Unified platform',Math.round(m.deng*0.05*40),'hrs/wk — one platform, one schema')}
+    </div></div>
+
+    <div class="note"><strong>How to read these numbers:</strong> Cost 1 and Cost 2 use only your team headcount, published time benchmarks, and salary inputs — they're designed to be walked through line-by-line with a finance team. Cost 3 uses a 15% context-switch factor, not full idle time. The overhead ratio is the most senior-executive-ready number: it shows what percentage of your analytics investment is consumed before it produces any value.</div>
   `;
 }
-const sliderMap={analysts:'analystsV',prep:'prepV',deng:'dengV',dmaint:'dmaintV',acost:'acostV',dcost:'dcostV',req:'reqV',wait:'waitV',days:'daysV'};
-Object.keys(sliderMap).forEach(id=>{document.getElementById(id).addEventListener('input',e=>{const v=parseFloat(e.target.value);const out=document.getElementById(sliderMap[id]);if(id==='acost'||id==='dcost')out.textContent=fK(v);else if(id==='prep'||id==='dmaint')out.textContent=v+'%';else if(id==='days')out.textContent=v%1===0?v:v.toFixed(1);else out.textContent=v;render();});});
-async function generateSummary(){
-  const m=lastM;if(!m)return;
-  const apiKeyEl=document.getElementById('apiKeyInput');
-  const apiKey=apiKeyEl?apiKeyEl.value.trim():'';
-  if(!apiKey){if(apiKeyEl){apiKeyEl.focus();apiKeyEl.style.borderColor='var(--red)';setTimeout(()=>{apiKeyEl.style.borderColor=''},2000);}return;}
-  const btn=document.getElementById('genBtn');
-  if(btn){btn.disabled=true;btn.textContent='Generating summary...';}
-  const sa=document.getElementById('summaryArea');
-  sa.style.display='block';
-  sa.innerHTML=`<div class="summary-wrap"><div class="loading"><div class="spinner"></div>Writing your executive summary...</div></div>`;
-  sa.scrollIntoView({behavior:'smooth',block:'start'});
-  const prompt=`Write a 3-paragraph executive summary for a CFO, CTO, or Chief Data Officer at a large enterprise evaluating analytics stack consolidation. Tone: direct, senior advisor. Quantitative. No fluff. No sales language.\n\nContext:\n- ${m.n} tools, ${m.pairs} integration pairs\n- ${m.analysts} analysts (${Math.round(m.prepPct*100)}% on prep) + ${m.deng} data engineers (${Math.round(m.dmaint*100)}% on upkeep)\n- Total analytics team budget: ${fK(m.totalBudget)}\n- ${m.overheadRatio}% of that budget consumed by fragmentation overhead\n- Cost 1 — Analyst capacity: ${fK(m.c1)}/yr (${m.analystFTE} FTE, ${m.analystHrsWkSaved} hrs/wk)\n- Cost 2 — Engineering integration tax: ${fK(m.c2)}/yr (${m.dengFTE} eng FTE)\n- Cost 3 — Decision-lag tax (15% interruption factor): ${fK(m.c3)}/yr\n- Total recoverable value: ${fK(m.totalSavings)}/yr\n- Freed capacity enables +${fN(m.newExperiments)} experiments/yr\n- Time to insight: ${m.days} days today vs ~1 hour unified\n\nParagraph 1 — The overhead ratio: ${m.overheadRatio}% of the analytics budget consumed before a single insight. Make concrete: ${m.analystFTE} analyst FTEs and ${m.dengFTE} engineering FTEs doing reconciliation not analytics. Frame as a structural tax on the function, not an efficiency complaint.\n\nParagraph 2 — What the freed capacity enables: ${fK(m.c1)} isn't a line item to cut, it's ${m.newExperiments} more experiments per year. Engineers freed from ${m.pairs} integration pairs can invest in data quality and platform capabilities. This is about what the org can do when it stops paying a complexity tax.\n\nParagraph 3 — CFO framing: ${fK(m.totalSavings)} is a conservative floor using a 15% interruption factor and published benchmarks. The harder number is what ${m.days}-day decision cycles cost in product velocity. Close: this isn't about buying software, it's about recovering ${m.overheadRatio}% of the analytics investment currently funding complexity instead of insight.\n\nNo bullets. No headers. Max 4 sentences per paragraph. C-suite reader who will fact-check every number.`;
-  try{
-    const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:900,messages:[{role:'user',content:prompt}]})});
-    if(!resp.ok){const t=await resp.text();throw new Error(`${resp.status}: ${t.slice(0,300)}`);}
-    const data=await resp.json();
-    if(data.error)throw new Error(data.error.message);
-    const text=data.content?.find(b=>b.type==='text')?.text;
-    if(!text)throw new Error('No text in response');
-    const paras=text.trim().split(/\n\n+/).filter(p=>p.trim().length>20);
-    const today=new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
-    sa.innerHTML=`<div class="summary-wrap"><h2>Analytics fragmentation: the case for consolidation</h2><div class="sum-date">Executive summary &middot; ${today}</div><div class="sum-stats"><div class="ss r"><div class="ssl">Budget lost to overhead</div><div class="ssv">${m.overheadRatio}%</div></div><div class="ss r"><div class="ssl">Analyst FTEs locked in prep</div><div class="ssv">${m.analystFTE}</div></div><div class="ss a"><div class="ssl">New experiments / yr</div><div class="ssv">+${fN(m.newExperiments)}</div></div><div class="ss g"><div class="ssl">Total recoverable value</div><div class="ssv">${fK(m.totalSavings)}</div></div></div><div class="sum-body">${paras.map(p=>`<p>${p}</p>`).join('')}</div><button class="copy-btn" id="copyBtn" onclick="copySummary()">Copy summary text</button></div>`;
-  }catch(err){sa.innerHTML=`<div class="summary-wrap"><div class="err">Failed: ${err.message}</div></div>`;}
-  finally{const b=document.getElementById('genBtn');if(b){b.disabled=false;b.textContent='Regenerate summary';}}
-}
-function copySummary(){
-  const stats=document.querySelector('.sum-stats'),body=document.querySelector('.sum-body');if(!body)return;
-  let t='Analytics Fragmentation: The Case for Consolidation\n\n';
-  if(stats){stats.querySelectorAll('.ss').forEach(s=>{t+=s.querySelector('.ssl').textContent+': '+s.querySelector('.ssv').textContent+'\n'});t+='\n';}
-  t+=body.innerText;
-  navigator.clipboard.writeText(t).then(()=>{const btn=document.getElementById('copyBtn');if(btn){btn.textContent='Copied!';setTimeout(()=>{if(btn)btn.textContent='Copy summary text'},2000);}});
-}
+
+const sliderMap={
+  analysts:'analystsV', prep:'prepV',
+  deng:'dengV', dmaint:'dmaintV',
+  acost:'acostV', dcost:'dcostV',
+  req:'reqV', wait:'waitV', days:'daysV'
+};
+Object.keys(sliderMap).forEach(id=>{
+  document.getElementById(id).addEventListener('input',e=>{
+    const v=parseFloat(e.target.value);
+    const out=document.getElementById(sliderMap[id]);
+    if(id==='acost'||id==='dcost') out.textContent=fK(v);
+    else if(id==='prep'||id==='dmaint') out.textContent=v+'%';
+    else if(id==='days') out.textContent=v%1===0?v:v.toFixed(1);
+    else out.textContent=v;
+    render();
+  });
+});
+
 render();
-</script></body></html>
+</script>
+</body>
+</html>
